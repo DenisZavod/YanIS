@@ -2,10 +2,14 @@ import tkinter as tk
 from tkinter import ttk
 from ttkthemes import ThemedTk
 import sqlite3
+import os
 import pandas as pd
 from tkinter import filedialog
 from tkinter.messagebox import OK, INFO, showinfo
 from tkcalendar import Calendar 
+
+from openpyxl import load_workbook
+from openpyxl.utils import get_column_letter
 
 
 
@@ -67,3 +71,16 @@ def upload_result(k, f, n, d):
     print(pivot_table)
 
     pivot_table.to_excel("Посещаемость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx")
+    
+    file_path = "Посещаемость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx"
+    wb = load_workbook(file_path)
+    ws = wb.active
+    ws.column_dimensions['A'].width = 40
+                    
+    for i in range(2, ws.max_column + 1):
+        col_letter = get_column_letter(i)
+        ws.column_dimensions[col_letter].width = 15
+                    
+    ws.freeze_panes = 'B1'
+    wb.save(file_path)
+    wb.close()
