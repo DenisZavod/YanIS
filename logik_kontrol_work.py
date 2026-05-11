@@ -6,6 +6,9 @@ import pandas as pd
 from tkinter import filedialog
 from tkinter.messagebox import OK, INFO, showinfo 
 
+from openpyxl import load_workbook
+from openpyxl.utils import get_column_letter
+
 
 
 id_disc = 0
@@ -39,52 +42,6 @@ def get_list_discipline(cmb):
        #print(id_disc)
     cmb.bind("<<ComboboxSelected>>", show_selected)
     
-
-# def get_list_discipline_for_poisk(cmb, cmb2):
-#     conn = sqlite3.connect('university.db')  # укажите путь к своей базе данных
-#     cursor = conn.cursor()
-#     cursor.execute("SELECT id_discipline, name_discipline FROM discipline")  # предположим, что у вас есть таблица subjects с полями id и name
-#     rows = cursor.fetchall()
-#     conn.close()
-    
-#     disciplines_dict = {row[0]: row[1] for row in rows}
-#     names_list = list(disciplines_dict.values())
-#     #print(names_list)
-#     cmb.config(values=names_list)
-    
-    
-#     # def show_selected(event):
-#     #     global id_disc
-#     #     discipline_name = cmb.get()
-#     #     discipline_id = next((key for key, value in disciplines_dict.items() if value == discipline_name), None)
-#     #     #print(f"Ваша дисциплина: {discipline_name}. Её ID: {discipline_id}")
-#     #     id_disc = discipline_id
-#     #     print(id_disc)
-        
-#     cmb.bind("<<ComboboxSelected>>", selector_kr(cmb , cmb2))
-    
-    
-# def selector_kr(cmb_disc, cmb_kr):
-#     conn = sqlite3.connect('university.db')  # укажите путь к своей базе данных
-#     cursor = conn.cursor()
-#     cursor.execute("SELECT id_control_work, name_control_work FROM control_work LEFT JOIN  discipline on discipline.id_discipline = control_work.id_discipline WHERE name_discipline=?", (cmb_disc.get(),))  # предположим, что у вас есть таблица subjects с полями id и name
-#     rows = cursor.fetchall()
-#     conn.close()
-    
-#     print("qwertty" + cmb_disc.get() + "334444444444444")
-    
-#     kr_dict = {row[0]: row[1] for row in rows}
-#     names_list = list(kr_dict.values())
-#     cmb_kr.config(values=names_list)
-    
-    
-#     def show_selected(event):
-#         global id_kr_sel
-#         kr_name = cmb_kr.get()
-#         kr_id = next((key for key, value in kr_dict.items() if value == kr_name), None)
-#         #print(f"Ваша дисциплина: {discipline_name}. Её ID: {discipline_id}")
-#         id_kr_sel = kr_id
-#     cmb_kr.bind("<<ComboboxSelected>>", show_selected)
          
 def get_list_discipline_for_poisk(cmb, cmb2):
     conn = sqlite3.connect('university.db')  # Подключение к вашей БД
@@ -399,6 +356,19 @@ def upload_result(k, f, n, d):
 
 
     pivot_table.to_excel("Ведомость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx") 
+    
+    file_path = "Ведомость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx"
+    wb = load_workbook(file_path)
+    ws = wb.active
+    ws.column_dimensions['A'].width = 40
+                    
+    for i in range(2, ws.max_column + 1):
+        col_letter = get_column_letter(i)
+        ws.column_dimensions[col_letter].width = 25
+                    
+    ws.freeze_panes = 'B1'
+    wb.save(file_path)
+    wb.close() 
     
     
 def create_treeview_table(root, k, f, n, d):

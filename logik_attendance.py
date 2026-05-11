@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 from ttkthemes import ThemedTk
 import sqlite3
-import os
 import pandas as pd
 from tkinter import filedialog
 from tkinter.messagebox import OK, INFO, showinfo
@@ -72,6 +71,7 @@ def upload_result(k, f, n, d):
 
     pivot_table.to_excel("Посещаемость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx")
     
+    
     file_path = "Посещаемость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx"
     wb = load_workbook(file_path)
     ws = wb.active
@@ -83,4 +83,4 @@ def upload_result(k, f, n, d):
                     
     ws.freeze_panes = 'B1'
     wb.save(file_path)
-    wb.close()
+    wb.close()        

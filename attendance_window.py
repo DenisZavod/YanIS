@@ -167,7 +167,7 @@ def create_attendance(root):
             selected_item = selected_item[0] 
             values = tree.item(selected_item, 'values')  
            
-            la.create_attendance_stud(cal, combobox_discipline, 'Присутствовал', values[0])
+            la.create_attendance_stud(cal, combobox_discipline, 'Отсутствовал', values[0])
 
             tree.tag_configure('red', background='red')
 
