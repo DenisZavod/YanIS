@@ -6,20 +6,23 @@ from git.exc import InvalidGitRepositoryError, GitCommandError,  InvalidGitRepos
 from tkinter.messagebox import OK, INFO, showinfo
 
 def check_git_repos():
-
     INSTALL_DIR = os.path.dirname(os.path.abspath(__file__))
 
     try:
         repo = Repo(INSTALL_DIR)
-        info = repo.remotes.origin.fetch()
-
+        changes = repo.index.diff("origin/main")
         
-        if info[0].commit.count() > 0:
-            print("УСПЕШНО: Программа обновлена до последней версии.")
-            showinfo(title="Уведомление АИС", message="УСПЕШНО: Программа обновлена до последней версии.")
-            exit()
+        if len(changes) > 0:
+            print("Найдены изменения. Запуск pull...")
+            origin = repo.remotes.origin
+            info_pull = origin.pull()
+            showinfo(title="Уведомление АИС", message="УСПЕШНО: Программа обновлена.\nПерезапустите приложение.")
+            
         else:
+            print("Обновлений нет.")
             showinfo(title="Уведомление АИС", message="Обновлений нет.")
 
     except InvalidGitRepositoryError:
-        print("Ошибка: В этой папке нет Git-репозитория.")
+        showinfo(title="Ошибка АИС", message="Ошибка: Репозиторий не найден.")
+    except Exception as e:
+        showinfo(title="Ошибка АИС", message="Не удалось проверить обновления.")
