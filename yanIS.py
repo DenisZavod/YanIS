@@ -10,6 +10,7 @@ import university_group_window
 import kontrol_work_window
 import student_group_window
 import attendance_window
+import git_update_window
 
 
 
@@ -327,6 +328,10 @@ def button6_clicked():
     print("Кнопка 6 была нажата!")
     discipline_window.create_discipline_window(root)
     
+def button7_clicked():
+    print("Кнопка 7 была нажата!")
+    git_update_window.create_git_update_window(root)
+    
 def add_stud():
     st_dt = create_student_window()
     conn=sqlite3.connect("university.db", check_same_thread=False)
@@ -341,7 +346,7 @@ def add_stud():
 
 
 root = ThemedTk(theme="clam") #  Root window must be a ThemedTk window to apply themes.
-root.geometry("700x370")
+root.geometry("700x500")
 root.title("Информационная система успеваемости и посещаемости студентов")
 root.resizable(False, False)
 root.configure(bg="#7FFFD4")
@@ -355,6 +360,7 @@ icon_image_3 = tk.PhotoImage(file="learning_group.png")
 icon_image_4 = tk.PhotoImage(file="control_work.png")
 icon_image_5 = tk.PhotoImage(file="attendance.png")
 icon_image_6 = tk.PhotoImage(file="discipline.png")
+icon_image_7 = tk.PhotoImage(file="git.png")
 
 
 style.configure(
@@ -381,6 +387,7 @@ button3 = ttk.Button(root, text="Учебные группы", command=button3_c
 button4 = ttk.Button(root, text="Контрольные работы", command=button4_clicked, style="CustomButton.TButton", image=icon_image_4, compound="left")
 button5 = ttk.Button(root, text="Посещаемость", command=button5_clicked, style="CustomButton.TButton", image=icon_image_5, compound="left")
 button6 = ttk.Button(root, text="Дисциплины", command=button6_clicked, style="CustomButton.TButton", image=icon_image_6, compound="left")
+button7 = ttk.Button(root, text="Обновления", command=button7_clicked, style="CustomButton.TButton", image=icon_image_7, compound="left")
 
 # Размещаем кнопки с помощью grid
 button1.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
@@ -389,6 +396,7 @@ button3.grid(row=1, column=0, padx=5, pady=5, sticky="ew")
 button4.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
 button5.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
 button6.grid(row=2, column=1, padx=5, pady=5, sticky="ew")
+button7.grid(row=3, column=0, padx=5, pady=5, sticky="ew")
 
 
 # Конфигурация для масштабирования при изменении размера окна
