@@ -17,6 +17,7 @@ def check_git_repos():
         if info[0].commit.count() > 0:
             print("УСПЕШНО: Программа обновлена до последней версии.")
             showinfo(title="Уведомление АИС", message="УСПЕШНО: Программа обновлена до последней версии.")
+            exit()
         else:
             showinfo(title="Уведомление АИС", message="Обновлений нет.")
 
