@@ -11,10 +11,10 @@ def check_git_repos():
 
     try:
         repo = Repo(INSTALL_DIR)
-        origin = repo.remotes.origin
-        info = origin.pull()
+        info = repo.remotes.origin.fetch()
+
         
-        if info[0].flags > 0:
+        if info[0].commit.count() > 0:
             print("УСПЕШНО: Программа обновлена до последней версии.")
             showinfo(title="Уведомление АИС", message="УСПЕШНО: Программа обновлена до последней версии.")
         else:
