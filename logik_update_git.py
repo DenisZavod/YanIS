@@ -7,11 +7,9 @@ from tkinter.messagebox import OK, INFO, showinfo
 
 def check_git_repos():
 
-    REPO_URL = "https://github.com/DenisZavod/YanIS.git"
     INSTALL_DIR = os.path.dirname(os.path.abspath(__file__))
 
     try:
-        # Пробуем подключиться к репозиторию
         repo = Repo(INSTALL_DIR)
         origin = repo.remotes.origin
         info = origin.pull()
@@ -23,5 +21,4 @@ def check_git_repos():
             showinfo(title="Уведомление АИС", message="Обновлений нет.")
 
     except InvalidGitRepositoryError:
-        # Этот код выполнится, если репозитория нет
         print("Ошибка: В этой папке нет Git-репозитория.")
