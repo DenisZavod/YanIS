@@ -9,8 +9,9 @@ import logik_update_git as lug
 def create_git_update_window(root):
     git_update_window = tk.Toplevel(root)  
     git_update_window.title("Обновления из Git-репозитория")
-    git_update_window.geometry("700x600")
+    git_update_window.geometry("400x100")
     git_update_window.configure(bg="#FF8C00")
+    git_update_window.resizable(False, False)
     
     
     style = ttk.Style()
@@ -81,7 +82,7 @@ def create_git_update_window(root):
     button_check_git = ttk.Button(nav_frame, text="Проверить обновления", style="CustomButton5.TButton", command=lambda:lug.check_git_repos())
     button_check_git.grid(row=0, column=0, padx=5, pady=5, sticky="we")
     
-    button_update_git = ttk.Button(nav_frame, text="Обновить приложение", style="CustomButton5.TButton")
+    button_update_git = ttk.Button(nav_frame, text="Обновить приложение", style="CustomButton5.TButton", command=lambda:lug.download_update_system())
     button_update_git.grid(row=1, column=0, padx=5, pady=5, sticky="we")
     
     nav_frame.grid_columnconfigure(0, weight=1)
