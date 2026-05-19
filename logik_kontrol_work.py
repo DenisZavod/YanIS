@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from tkinter import ttk
 from ttkthemes import ThemedTk
@@ -354,10 +355,15 @@ def upload_result(k, f, n, d):
         margins_name='Итого'
     )
 
+    folder_path = "Успеваемость"
 
-    pivot_table.to_excel("Ведомость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx") 
+
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+        
+    pivot_table.to_excel("Успеваемость/Ведомость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx") 
     
-    file_path = "Ведомость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx"
+    file_path = "Успеваемость/Ведомость-" + k.get() + "-" + f.get() + "-" + n.get() + " " + d.get() +  ".xlsx"
     wb = load_workbook(file_path)
     ws = wb.active
     ws.column_dimensions['A'].width = 40

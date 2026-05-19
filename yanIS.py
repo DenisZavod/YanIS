@@ -11,6 +11,7 @@ import kontrol_work_window
 import student_group_window
 import attendance_window
 import git_update_window
+import user_folders_window
 
 
 
@@ -331,6 +332,10 @@ def button6_clicked():
 def button7_clicked():
     print("Кнопка 7 была нажата!")
     git_update_window.create_git_update_window(root)
+
+def button8_clicked():
+    print("Кнопка 8 была нажата!")
+    user_folders_window.create_user_folders_window(root)
     
 def add_stud():
     st_dt = create_student_window()
@@ -361,6 +366,7 @@ icon_image_4 = tk.PhotoImage(file="control_work.png")
 icon_image_5 = tk.PhotoImage(file="attendance.png")
 icon_image_6 = tk.PhotoImage(file="discipline.png")
 icon_image_7 = tk.PhotoImage(file="git.png")
+icon_image_8 = tk.PhotoImage(file="folder.png")
 
 
 style.configure(
@@ -388,6 +394,7 @@ button4 = ttk.Button(root, text="Контрольные работы", command=b
 button5 = ttk.Button(root, text="Посещаемость", command=button5_clicked, style="CustomButton.TButton", image=icon_image_5, compound="left")
 button6 = ttk.Button(root, text="Дисциплины", command=button6_clicked, style="CustomButton.TButton", image=icon_image_6, compound="left")
 button7 = ttk.Button(root, text="Обновления", command=button7_clicked, style="CustomButton.TButton", image=icon_image_7, compound="left")
+button8 = ttk.Button(root, text="Ведомости", command=button8_clicked, style="CustomButton.TButton", image=icon_image_8, compound="left")
 
 # Размещаем кнопки с помощью grid
 button1.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
@@ -397,6 +404,7 @@ button4.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
 button5.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
 button6.grid(row=2, column=1, padx=5, pady=5, sticky="ew")
 button7.grid(row=3, column=0, padx=5, pady=5, sticky="ew")
+button8.grid(row=3, column=1, padx=5, pady=5, sticky="ew")
 
 
 # Конфигурация для масштабирования при изменении размера окна
